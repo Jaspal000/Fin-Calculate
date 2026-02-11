@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 15% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 20%;
+    --primary: 220 45% 18%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 45% 18%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 145 45% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 45% 18%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 15% 20%;
+    --sidebar-primary: 220 45% 18%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 45% 18%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 220 45% 18%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .calculator-input {
+    @apply w-full px-4 py-3 border border-border rounded-lg bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors;
+  }
+  
+  .calculator-btn {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors;
+  }
+  
+  .calculator-btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors;
+  }
+  
+  .result-card {
+    @apply bg-primary/5 border border-primary/10 rounded-lg p-6;
+  }
+  
+  .result-value {
+    @apply text-3xl font-bold text-primary;
+  }
+  
+  .ad-placeholder {
+    @apply bg-muted border-2 border-dashed border-muted-foreground/30 rounded-lg flex items-center justify-center text-muted-foreground text-sm min-h-[90px];
+  }
+  
+  .breadcrumb {
+    @apply flex items-center gap-2 text-sm text-muted-foreground;
+  }
+  
+  .breadcrumb a {
+    @apply hover:text-primary transition-colors;
+  }
+  
+  .section-title {
+    @apply text-2xl font-semibold text-foreground mb-4;
+  }
+  
+  .content-section {
+    @apply prose prose-slate max-w-none;
+  }
+  
+  .faq-item {
+    @apply border-b border-border py-4;
+  }
+  
+  .related-link {
+    @apply inline-flex items-center text-primary hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
