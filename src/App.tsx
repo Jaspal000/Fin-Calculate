@@ -6,9 +6,10 @@ import { StateMortgagePage } from '@/pages/StateMortgagePage';
 import { CalculatorPage } from '@/components/CalculatorPage';
 import { allCalculators, calculatorCategories } from '@/data/calculators';
 
-// Simple router based on pathname
+// Simple router based on query parameter instead of pathname
 function Router() {
-  const path = window.location.pathname;
+  const params = new URLSearchParams(window.location.search);
+  const path = params.get('route') || '/';
 
   // Home page
   if (path === '/' || path === '/index.html') {
@@ -36,19 +37,27 @@ function Router() {
     const categoryKey = calcMatch[1];
     const calcKey = calcMatch[2];
     const calcData = allCalculators[calcKey];
-    
+
     if (calcData) {
       const breadcrumbs = [
-        { name: 'US', url: '/us/' },
-        { name: calculatorCategories[categoryKey as keyof typeof calculatorCategories]?.title.replace('US ', '') || categoryKey, url: `/us/${categoryKey}/` },
-        { name: calcData.title.replace('US ', ''), url: `/us/${categoryKey}/${calcKey}` },
+        { name: 'US', url: '/?route=/us/' },
+        {
+          name:
+            calculatorCategories[categoryKey as keyof typeof calculatorCategories]?.title.replace('US ', '') ||
+            categoryKey,
+          url: `/?route=/us/${categoryKey}/`,
+        },
+        {
+          name: calcData.title.replace('US ', ''),
+          url: `/?route=/us/${categoryKey}/${calcKey}`,
+        },
       ];
 
       return (
         <CalculatorPage
           data={calcData}
           breadcrumbs={breadcrumbs}
-          url={`/us/${categoryKey}/${calcKey}`}
+          url={`/?route=/us/${categoryKey}/${calcKey}`}
         />
       );
     }
@@ -59,10 +68,10 @@ function Router() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
       <h1 className="text-4xl font-bold text-foreground mb-4">Page Not Found</h1>
       <p className="text-muted-foreground mb-8">
-        The calculator you are looking for does not exist. 
+        The calculator you are looking for does not exist.
         Browse our available calculators below.
       </p>
-      <a 
+      <a
         href="/"
         className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
       >
